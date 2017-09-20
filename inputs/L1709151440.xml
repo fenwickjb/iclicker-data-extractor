@@ -1,0 +1,210 @@
+<!--**************** Naming Convention **********-->
+<!--qn : Question Name-->
+<!--quuid : Question Universally Unique Identifier-->
+<!--resp : Response prefix-->
+<!--strt : Start Time-->
+<!--stp : Stop Time-->
+<!--isspp : is self paced polling-->
+<!--isap : is Anonymous polling-->
+<!--qType : Question Type-->
+<!--sig : Significiant Characters-->
+<!--idx : Question Index (SrNo)-->
+<!--cans : Correct answer-->
+<!--ssn : Session tag-->
+<!--v : Voting-->
+<!--ans : Final Response recorded-->
+<!--fans : first response-->
+<!--id : Clicker ID-->
+<!--scr : Score-->
+<!--fanst : Final answer time-->
+<!--att : Number of attempts-->
+<!--tm : Time-->
+<!--lto : Loaned clicker to-->
+<!--p : Polling tag name-->
+<!--part : Participation Points-->
+<!--perf : performance points-->
+<!--minrep : Minimum reply-->
+<!--ssnn : Session Name-->
+<!--anspt : Correct answer points-->
+<!--tscr : total score across polling questions for the student-->
+<!--isDel : flag to indicate whether the quesiton is deleted-->
+<!--MinPart_S : store the Participation Requirement setting as it was selected in i>clicker -> Scoring tab-->
+<!--spp : store information whether the session was an SPP session-->
+<!--akfile : store information about the answer key file used to run this SPP session-->
+<!--extra : store extra information required for future internal or external use-->
+<!--anypt : this tag will be used to store response any choice points-->
+<!--File naming convention : for example if the file name is 'L1309231102.xml'-->
+<!--L - Indication that this is a session log file the deleted session files will prefix with x-->
+<!--13 - Year-->
+<!--09 - Month-->
+<!--23 - Day-->
+<!--11 - Hour-->
+<!--02 - Minute-->
+<!--******************************************-->
+<ssn part="1" ssnn="Session 1" minrep="2" akfile="" suuid="00000000-0000-0000-0000-000000000000" perf="-1" extra="" cdts="" MinPart_S="at least 75% of the questions" spp="false">
+ <p isDel="N" strt="14:42:20" resp_b="1||0.00" resp_a="1||0.00" qType="MC" stp="14:42:39" resp_d="0||0.00" idx="1" anypt="0" resp_c="0||0.00" cans="" anspt="1" isap="N" qn="Question 1" resp_e="0||0.00" sig="16" isspp="N" quuid="00000000-0000-0000-0000-000000000000">
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#017C1964" scr="" lto=""/>
+  <v fans="A" fanst="2.74" tscr="0" ans="A" att="1" tm="2.74" id="#058DC74F" scr="0.00" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#05AB0DA3" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#05CE5A91" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0AACA80E" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E2FFFDE" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E439CD1" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E44D399" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E8C880A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E8FAB2A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0EA46BC1" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0EA72089" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0EA87DDB" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#22566E1A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#225D9FE0" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#22879F3A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2328313A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#232F363A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24081D31" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2408200C" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#240AF8D6" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#240B052A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#240E173D" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24104672" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2410A296" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24145A6A" scr="" lto=""/>
+  <v fans="B" fanst="14.86" tscr="1" ans="B" att="3" tm="14.79" id="#24175162" scr="0.00" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241796A5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24181925" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241B5E61" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241D6C55" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241E6C56" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241EEFD5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2422DBDD" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#311DC4E8" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#311DDCF0" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3127E4F2" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#312E4A55" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3139FCF4" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3142196A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#314BEA90" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#314FCEB0" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#31602A7B" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#31629CCF" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#316C411C" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#317185C5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#317C6A27" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3183DB69" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#32517310" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3297B015" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#329AE941" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#329B6CC5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#32D00CEE" scr="" lto=""/>
+ </p>
+ <p isDel="N" strt="15:29:32" resp_b="4||0.00" resp_a="18||0.00" qType="MC" stp="16:27:37" resp_d="7||0.00" idx="2" anypt="0" resp_c="6||0.00" cans="" anspt="1" isap="N" qn="Question 2" resp_e="17||0.00" sig="16" isspp="N" quuid="00000000-0000-0000-0000-000000000000">
+  <v fans="E" fanst="1188.77" tscr="0" ans="E" att="1" tm="1188.77" id="#017C1964" scr="0.00" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#058DC74F" scr="" lto=""/>
+  <v fans="A" fanst="2357.85" tscr="0" ans="A" att="1" tm="2357.85" id="#05AB0DA3" scr="0.00" lto=""/>
+  <v fans="E" fanst="924.47" tscr="0" ans="E" att="1" tm="924.47" id="#05CE5A91" scr="0.00" lto=""/>
+  <v fans="A" fanst="3436.93" tscr="0" ans="A" att="1" tm="3436.93" id="#0AACA80E" scr="0.00" lto=""/>
+  <v fans="E" fanst="2897.32" tscr="0" ans="E" att="1" tm="2897.32" id="#0E2FFFDE" scr="0.00" lto=""/>
+  <v fans="D" fanst="1059.12" tscr="0" ans="D" att="1" tm="1059.12" id="#0E439CD1" scr="0.00" lto=""/>
+  <v fans="B" fanst="277.02" tscr="0" ans="B" att="1" tm="277.02" id="#0E44D399" scr="0.00" lto=""/>
+  <v fans="C" fanst="1888.67" tscr="0" ans="C" att="1" tm="1888.67" id="#0E8C880A" scr="0.00" lto=""/>
+  <v fans="E" fanst="804.91" tscr="0" ans="E" att="1" tm="804.91" id="#0E8FAB2A" scr="0.00" lto=""/>
+  <v fans="E" fanst="713.85" tscr="0" ans="E" att="1" tm="713.85" id="#0EA46BC1" scr="0.00" lto=""/>
+  <v fans="A" fanst="2805.41" tscr="0" ans="A" att="1" tm="2805.41" id="#0EA72089" scr="0.00" lto=""/>
+  <v fans="A" fanst="1401.22" tscr="0" ans="A" att="1" tm="1401.22" id="#0EA87DDB" scr="0.00" lto=""/>
+  <v fans="A" fanst="2289.11" tscr="0" ans="A" att="1" tm="2289.11" id="#22566E1A" scr="0.00" lto=""/>
+  <v fans="E" fanst="118.06" tscr="0" ans="E" att="1" tm="118.06" id="#225D9FE0" scr="0.00" lto=""/>
+  <v fans="D" fanst="2386.75" tscr="0" ans="D" att="1" tm="2386.75" id="#22879F3A" scr="0.00" lto=""/>
+  <v fans="A" fanst="955.42" tscr="0" ans="A" att="1" tm="955.42" id="#2328313A" scr="0.00" lto=""/>
+  <v fans="B" fanst="3028.22" tscr="0" ans="B" att="1" tm="3028.22" id="#232F363A" scr="0.00" lto=""/>
+  <v fans="A" fanst="482.34" tscr="0" ans="A" att="1" tm="482.34" id="#24081D31" scr="0.00" lto=""/>
+  <v fans="B" fanst="1138.04" tscr="0" ans="B" att="1" tm="1138.04" id="#2408200C" scr="0.00" lto=""/>
+  <v fans="D" fanst="1784.57" tscr="0" ans="D" att="1" tm="1784.57" id="#240AF8D6" scr="0.00" lto=""/>
+  <v fans="A" fanst="312.16" tscr="0" ans="A" att="1" tm="312.16" id="#240B052A" scr="0.00" lto=""/>
+  <v fans="E" fanst="1271.15" tscr="0" ans="E" att="1" tm="1271.15" id="#240E173D" scr="0.00" lto=""/>
+  <v fans="A" fanst="3266.65" tscr="0" ans="A" att="1" tm="3266.65" id="#24104672" scr="0.00" lto=""/>
+  <v fans="E" fanst="238.22" tscr="0" ans="E" att="1" tm="238.22" id="#2410A296" scr="0.00" lto=""/>
+  <v fans="E" fanst="2327.59" tscr="0" ans="E" att="1" tm="2327.59" id="#24145A6A" scr="0.00" lto=""/>
+  <v fans="C" fanst="1436.08" tscr="1" ans="C" att="1" tm="1436.08" id="#24175162" scr="0.00" lto=""/>
+  <v fans="E" fanst="1813.84" tscr="0" ans="E" att="1" tm="1813.84" id="#241796A5" scr="0.00" lto=""/>
+  <v fans="E" fanst="196.62" tscr="0" ans="E" att="1" tm="196.62" id="#24181925" scr="0.00" lto=""/>
+  <v fans="B" fanst="2080.48" tscr="0" ans="B" att="1" tm="2080.48" id="#241B5E61" scr="0.00" lto=""/>
+  <v fans="E" fanst="1918.77" tscr="0" ans="E" att="1" tm="1918.77" id="#241D6C55" scr="0.00" lto=""/>
+  <v fans="A" fanst="1012.70" tscr="0" ans="A" att="1" tm="1012.70" id="#241E6C56" scr="0.00" lto=""/>
+  <v fans="D" fanst="2258.47" tscr="0" ans="D" att="1" tm="2258.47" id="#241EEFD5" scr="0.00" lto=""/>
+  <v fans="D" fanst="378.04" tscr="0" ans="D" att="1" tm="378.04" id="#2422DBDD" scr="0.00" lto=""/>
+  <v fans="C" fanst="1302.38" tscr="0" ans="C" att="1" tm="1302.38" id="#311DC4E8" scr="0.00" lto=""/>
+  <v fans="A" fanst="1860.52" tscr="0" ans="A" att="1" tm="1860.52" id="#311DDCF0" scr="0.00" lto=""/>
+  <v fans="C" fanst="3359.35" tscr="0" ans="C" att="1" tm="3359.35" id="#3127E4F2" scr="0.00" lto=""/>
+  <v fans="A" fanst="641.77" tscr="0" ans="A" att="1" tm="641.77" id="#312E4A55" scr="0.00" lto=""/>
+  <v fans="A" fanst="1552.60" tscr="0" ans="A" att="1" tm="1552.60" id="#3139FCF4" scr="0.00" lto=""/>
+  <v fans="A" fanst="1836.42" tscr="0" ans="A" att="1" tm="1836.42" id="#3142196A" scr="0.00" lto=""/>
+  <v fans="A" fanst="1751.11" tscr="0" ans="A" att="1" tm="1751.11" id="#314BEA90" scr="0.00" lto=""/>
+  <v fans="E" fanst="847.66" tscr="0" ans="E" att="1" tm="847.66" id="#314FCEB0" scr="0.00" lto=""/>
+  <v fans="A" fanst="571.09" tscr="0" ans="A" att="1" tm="571.09" id="#31602A7B" scr="0.00" lto=""/>
+  <v fans="D" fanst="853.14" tscr="0" ans="D" att="1" tm="853.14" id="#31629CCF" scr="0.00" lto=""/>
+  <v fans="E" fanst="614.18" tscr="0" ans="E" att="1" tm="614.18" id="#316C411C" scr="0.00" lto=""/>
+  <v fans="D" fanst="2582.52" tscr="0" ans="D" att="1" tm="2582.52" id="#317185C5" scr="0.00" lto=""/>
+  <v fans="A" fanst="1096.37" tscr="0" ans="A" att="1" tm="1096.37" id="#317C6A27" scr="0.00" lto=""/>
+  <v fans="C" fanst="2222.26" tscr="0" ans="C" att="1" tm="2222.26" id="#3183DB69" scr="0.00" lto=""/>
+  <v fans="E" fanst="2183.43" tscr="0" ans="E" att="1" tm="2183.43" id="#32517310" scr="0.00" lto=""/>
+  <v fans="C" fanst="768.94" tscr="0" ans="C" att="1" tm="768.94" id="#3297B015" scr="0.00" lto=""/>
+  <v fans="E" fanst="1345.47" tscr="0" ans="E" att="1" tm="1345.47" id="#329AE941" scr="0.00" lto=""/>
+  <v fans="E" fanst="1237.12" tscr="0" ans="E" att="1" tm="1237.12" id="#329B6CC5" scr="0.00" lto=""/>
+  <v fans="A" fanst="1606.92" tscr="0" ans="A" att="1" tm="1606.92" id="#32D00CEE" scr="0.00" lto=""/>
+ </p>
+ <p isDel="N" strt="16:28:57" resp_b="0||0.00" resp_a="0||0.00" qType="MC" stp="16:28:59" resp_d="0||0.00" idx="3" anypt="0" resp_c="0||0.00" cans="" anspt="1" isap="N" qn="Question 3" resp_e="0||0.00" sig="16" isspp="N" quuid="00000000-0000-0000-0000-000000000000">
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#017C1964" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#058DC74F" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#05AB0DA3" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#05CE5A91" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0AACA80E" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E2FFFDE" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E439CD1" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E44D399" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E8C880A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0E8FAB2A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0EA46BC1" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0EA72089" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#0EA87DDB" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#22566E1A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#225D9FE0" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#22879F3A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2328313A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#232F363A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24081D31" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2408200C" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#240AF8D6" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#240B052A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#240E173D" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24104672" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2410A296" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24145A6A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="1" ans="" att="" tm="" id="#24175162" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241796A5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#24181925" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241B5E61" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241D6C55" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241E6C56" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#241EEFD5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#2422DBDD" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#311DC4E8" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#311DDCF0" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3127E4F2" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#312E4A55" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3139FCF4" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3142196A" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#314BEA90" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#314FCEB0" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#31602A7B" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#31629CCF" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#316C411C" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#317185C5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#317C6A27" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3183DB69" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#32517310" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#3297B015" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#329AE941" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#329B6CC5" scr="" lto=""/>
+  <v fans="" fanst="" tscr="0" ans="" att="" tm="" id="#32D00CEE" scr="" lto=""/>
+ </p>
+</ssn>
