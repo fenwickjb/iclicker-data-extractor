@@ -1,0 +1,51 @@
+<!--**************** Naming Convention **********-->
+<!--qn : Question Name-->
+<!--quuid : Question Universally Unique Identifier-->
+<!--resp : Response prefix-->
+<!--strt : Start Time-->
+<!--stp : Stop Time-->
+<!--isspp : is self paced polling-->
+<!--isap : is Anonymous polling-->
+<!--qType : Question Type-->
+<!--sig : Significiant Characters-->
+<!--idx : Question Index (SrNo)-->
+<!--cans : Correct answer-->
+<!--ssn : Session tag-->
+<!--v : Voting-->
+<!--ans : Final Response recorded-->
+<!--fans : first response-->
+<!--id : Clicker ID-->
+<!--scr : Score-->
+<!--fanst : Final answer time-->
+<!--att : Number of attempts-->
+<!--tm : Time-->
+<!--lto : Loaned clicker to-->
+<!--p : Polling tag name-->
+<!--part : Participation Points-->
+<!--perf : performance points-->
+<!--minrep : Minimum reply-->
+<!--ssnn : Session Name-->
+<!--anspt : Correct answer points-->
+<!--tscr : total score across polling questions for the student-->
+<!--isDel : flag to indicate whether the quesiton is deleted-->
+<!--MinPart_S : store the Participation Requirement setting as it was selected in i>clicker -> Scoring tab-->
+<!--spp : store information whether the session was an SPP session-->
+<!--akfile : store information about the answer key file used to run this SPP session-->
+<!--extra : store extra information required for future internal or external use-->
+<!--anypt : this tag will be used to store response any choice points-->
+<!--File naming convention : for example if the file name is 'L1309231102.xml'-->
+<!--L - Indication that this is a session log file the deleted session files will prefix with x-->
+<!--13 - Year-->
+<!--09 - Month-->
+<!--23 - Day-->
+<!--11 - Hour-->
+<!--02 - Minute-->
+<!--******************************************-->
+<ssn extra="" spp="false" akfile="" MinPart_S="at least 75% of the questions" ssnn="" suuid="00000000-0000-0000-0000-000000000000" perf="-1" minrep="0" cdts="" part="1">
+ <p qType="MC" qn="Question 1" strt="10:19:22" isap="N" isspp="N" resp_c="1||0.00" quuid="00000000-0000-0000-0000-000000000000" resp_e="0||0.00" isDel="N" anspt="1" resp_a="1||0.00" cans="" resp_d="1||0.00" anypt="0" sig="16" resp_b="1||0.00" stp="10:19:46" idx="1">
+  <v scr="0.00" fanst="17.34" ans="B" id="#A7E79EDE" lto="" tscr="1" att="1" tm="17.34" fans="B"/>
+  <v scr="0.00" fanst="22.23" ans="D" id="#A7EBD498" lto="" tscr="1" att="1" tm="22.23" fans="D"/>
+  <v scr="0.00" fanst="19.78" ans="C" id="#A7EE0E47" lto="" tscr="1" att="1" tm="19.78" fans="C"/>
+  <v scr="0.00" fanst="14.43" ans="A" id="#A86FA067" lto="" tscr="1" att="1" tm="14.43" fans="A"/>
+ </p>
+</ssn>
