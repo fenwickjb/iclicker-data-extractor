@@ -264,21 +264,39 @@ public class SessionDataExtractor {
 		while (userIDs.hasNextLine()) {
 		    // "clickerID","senatorName"
 		    String entryLine = userIDs.nextLine();
-		    //		System.err.println("userID line:("+entryLine+")");
+		    System.err.println("entryLine:"+entryLine);
+		    if (entryLine.startsWith("\"#Clicker") ||
+			entryLine.startsWith("#Clicker"))
+			continue; // skip header
 
-		    String[] iduser = entryLine.split(",");
-		    //		System.err.println("iduser[0]:("+iduser[0]+")");
-		    //		System.err.println("iduser[1]:("+iduser[1]+")");
+		    // Non-header data now
+		    String senator, clickerTag;
+		    if (entryLine.startsWith("\"#")) {
+			// System.out.println("Quoted entries");
+			// Have double quotes...
+			//	System.err.println("userID line:("+entryLine+")");
+
+			String[] iduser = entryLine.split(",");
+			//		System.err.println("iduser[0]:("+iduser[0]+")");
+			//		System.err.println("iduser[1]:("+iduser[1]+")");
 		
-		    String[] idParts = iduser[0].split("\"");
-		    //		System.err.println("idparts[0]:("+idParts[0]+")");
-		    //		System.err.println("idparts[1]:("+idParts[1]+")");
-		    String[] userParts = iduser[1].split("\"");
-		    //		System.err.println("userparts[0]:("+userParts[0]+")");
-		    //		System.err.println("userparts[1]:("+userParts[1]+")");
-		    String senator = "\"" + userParts[1].replace("-", ", ") + "\"";
-
-		    map.put(idParts[1], senator);
+			String[] idParts = iduser[0].split("\"");
+			clickerTag = idParts[1];
+			//		System.err.println("idparts[0]:("+idParts[0]+")");
+			//		System.err.println("idparts[1]:("+idParts[1]+")");
+			String[] userParts = iduser[1].split("\"");
+			//		System.err.println("userparts[0]:("+userParts[0]+")");
+			//		System.err.println("userparts[1]:("+userParts[1]+")");
+			senator = "\"" + userParts[1].replace("-", ", ") + "\"";
+		    }
+		    else {
+			//System.out.println("Unquoted entries");
+			// No double quotes (sometimes Excel strips the quotes??..)
+			String[] iduser = entryLine.split(",");
+			clickerTag = iduser[0];
+			senator = iduser[1].replace("-", ", ");
+		    }
+		    map.put(clickerTag, senator);
 		    senatorMap.put(senator, new ArrayList<String>());
 		}
 	    }
