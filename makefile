@@ -18,10 +18,10 @@ manifest.txt:
 	echo Main-Class: SessionDataExtractor > manifest.txt
 	echo Class-Path: jdom.jar >> manifest.txt
 
-mkjar: SessionDataExtractor.class jdom.jar manifest.txt
-	jar cfm SessionDataExtractor.jar manifest.txt SessionDataExtractor.class 
+mkjar: SessionDataExtractor.class jdom.jar manifest.txt SessionDataExtractor.java jdom.jar
+	jar cfm SessionDataExtractor.jar manifest.txt SessionDataExtractor.class SessionDataExtractor.java jdom.jar
 
-runjar: SessionDataExtractor.jar jdom.jar
+runjar: SessionDataExtractor.jar 
 	java -jar SessionDataExtractor.jar inputs/L1709190946.xml
 
 clean:

@@ -17,37 +17,89 @@ import org.jdom2.input.SAXBuilder;
 
 
 public class SessionDataExtractor {
-    private static final String defaultVoteMap = "A=Yes:B=ErrorB:C=No:D=ErrorD:E=Abstain";
+    private static final String defaultVoteMap = "A=Yes:B=B?:C=No:D=D?:E=Abstain";
 
     private Document document;
+    private String osName;
+    private char dirSlashChar;
     private String filename;
     private String idFilename;
     private String outFilename;
     private PrintStream outFile;
+    private String outVotelogFilename;
+    private PrintStream outVotelogFile;
     private ArrayList<String> voteMap;
+    private String[] qIgnoreList;
     private HashMap<String,String> clickerMap;
+    private HashMap<String,ArrayList<String>> senatorMap;
 
     public static void usage() {
 	System.err.println();
 	System.err.println("usage: java SessionDataExtractor [options] session-file");
 	System.err.println("options available:");
 	System.err.println("  -votemap A-E_mapping_string");
+	System.err.println("  -qignore number-list");
 
 	System.err.println("notes: RemoteId.csv file is automatically looked for.");
 	System.err.println("sample usage:");
-	System.err.println("  java SessionDataExtractor -votemap A=True:B=Unused:C=C:D=D:E=False L170909153200.xml");
+	System.err.println("  java SessionDataExtractor -votemap A=True:B=Unused:C=C:D=D:E=False -qignore 1,3 L170909153200.xml");
 	System.err.println();
     }
 
     public SessionDataExtractor(String[] args) {
+	osName = System.getProperty("os.name");
+	if (osName.startsWith("Mac")) {
+	    dirSlashChar = '/';
+	}
+	else {
+	    dirSlashChar = '\\';
+	}
+
 	String votemapString = defaultVoteMap;
+	qIgnoreList = new String[0];
 
 	if (args.length == 1) {
 	    filename = args[0];
 	}
-	else if ("-votemap".equals(args[0])) {
-	    votemapString = args[1];
+	else if (args.length == 3) {
+	    if ("-votemap".equals(args[0])) {
+		votemapString = args[1];
+	    }
+	    else if ("-qignore".equals(args[0])) {
+		qIgnoreList = args[1].split(",");
+	    }
+	    else {
+		usage();
+		System.exit(1);
+	    }
 	    filename = args[2];
+	}
+	else if (args.length == 5) {
+	    if ("-votemap".equals(args[0])) {
+		votemapString = args[1];
+		if ("-qignore".equals(args[2])) {
+		    qIgnoreList = args[3].split(",");
+		}
+		else {
+		    usage();
+		    System.exit(1);
+		}
+	    }
+	    else if ("-qignore".equals(args[0])) {
+		qIgnoreList = args[1].split(",");
+		if ("-votemap".equals(args[2])) {
+		    votemapString = args[3];
+		}
+		else {
+		    usage();
+		    System.exit(1);
+		}
+	    }
+	    else {
+		usage();
+		System.exit(1);
+	    }
+	    filename = args[4];
 	}
 	else {
 	    usage();
@@ -105,18 +157,36 @@ public class SessionDataExtractor {
 	if (stream != null) {
 	    stream.println();
 	    stream.println("Preparing to read i>Clicker session data...");
+	    stream.println("It looks like we are running " 
+			   + osName + " machine.");
+
 	    stream.println("  Input file: " + filename);
 	    if (clickerMap.size() == 0) 
-		stream.println("  Did not find RemoteIDs file");
+		stream.println("  Did not find RemoteIDs file, using clickerIDs.");
 	    else
-		stream.println("  Found RemoteIDs file");
+		stream.println("  Found RemoteIDs file.");
+
 	    if (outFile == System.out) 
 		stream.println("  Unable to open output file, dumping to screen.");
 	    else
 		stream.println("  Output file: " + outFilename);
+
 	    stream.println("  Clicker response map: " + printVoteMap());
+	    stream.println("  Ignoring questions: " + printQIgnoreList());
 	    stream.println();
 	}
+    }
+    public String printQIgnoreList() {
+	String list = "";
+	if (qIgnoreList.length > 0) {
+	    list += qIgnoreList[0];
+	    int idx=1;
+	    for ( ; idx < qIgnoreList.length; idx++) {
+		list += ",";
+		list += qIgnoreList[idx];
+	    }
+	}
+	return list;
     }
 
     public static void main(String[] args) {
@@ -127,7 +197,8 @@ public class SessionDataExtractor {
 	extractor.openDocument();
 
 	//	extractor.printStudents();
-	extractor.printAsCSV();
+	extractor.printSummaryCSV();
+	extractor.printVotelogCSV();
     }
 
     private Scanner openScanner(String filename) {
@@ -145,11 +216,14 @@ public class SessionDataExtractor {
     }
 
     private String buildOutput(String dataFilename) {
-	int chIndex = dataFilename.lastIndexOf('/');
-	String of = dataFilename.substring(chIndex+1);
-	chIndex = of.lastIndexOf('.');
-	of = of.substring(0,chIndex);
-	of += ".CSV";
+	int chIndex = dataFilename.lastIndexOf(dirSlashChar);
+	String baseFilename = dataFilename.substring(chIndex+1);
+	chIndex = baseFilename.lastIndexOf('.');
+	if (chIndex == -1) {
+	    System.err.println("base:"+baseFilename);
+	}
+	baseFilename = baseFilename.substring(0,chIndex);
+	String of = baseFilename + "_Summary.CSV";
 
 	try {
 	    outFile = new PrintStream(new File(of));
@@ -158,6 +232,14 @@ public class SessionDataExtractor {
 	    outFile = System.out;
 	}
 	
+	outVotelogFilename = baseFilename + "_Votelog.CSV";
+	try {
+	    outVotelogFile = new PrintStream(new File(outVotelogFilename));
+	}
+	catch (Exception e) {
+	    outVotelogFile = System.out;
+	}
+
 	return of;
     }
 
@@ -167,25 +249,45 @@ public class SessionDataExtractor {
 	Scanner userIDs;
 	userIDs = openScanner(filename);
 	if (userIDs == null) {
-	    int lastSlash = dataFilename.lastIndexOf('/');
+	    int lastSlash = dataFilename.lastIndexOf(dirSlashChar);
 	    if (lastSlash != -1) {
 		path = dataFilename.substring(0,lastSlash+1);
 		userIDs = openScanner(path+filename);
 	    }
 	}
-
 	HashMap<String,String> map =  new HashMap<String,String>();
+	senatorMap = new HashMap<String,ArrayList<String>>();
 
 	// fill map
 	if (userIDs != null) {
-	    while (userIDs.hasNextLine()) {
-		String entryLine = userIDs.nextLine();
+	    try {
+		while (userIDs.hasNextLine()) {
+		    // "clickerID","senatorName"
+		    String entryLine = userIDs.nextLine();
+		    //		System.err.println("userID line:("+entryLine+")");
 
-		String[] iduser = entryLine.split(",");
-		String[] idParts = iduser[0].split("\"");
-		String[] userParts = iduser[1].split("\"");
+		    String[] iduser = entryLine.split(",");
+		    //		System.err.println("iduser[0]:("+iduser[0]+")");
+		    //		System.err.println("iduser[1]:("+iduser[1]+")");
+		
+		    String[] idParts = iduser[0].split("\"");
+		    //		System.err.println("idparts[0]:("+idParts[0]+")");
+		    //		System.err.println("idparts[1]:("+idParts[1]+")");
+		    String[] userParts = iduser[1].split("\"");
+		    //		System.err.println("userparts[0]:("+userParts[0]+")");
+		    //		System.err.println("userparts[1]:("+userParts[1]+")");
+		    String senator = "\"" + userParts[1].replace("-", ", ") + "\"";
 
-		map.put(idParts[1], userParts[1]);
+		    map.put(idParts[1], senator);
+		    senatorMap.put(senator, new ArrayList<String>());
+		}
+	    }
+	    catch (Exception e) {
+		System.err.println(">>>> Error parsing the RemoteID.csv file.");
+		System.err.println(">>>> Ensure format of each line in file is like:");
+		System.err.println(">>>> \"#123ABC4D\",\"Lastname-Firstname (UNIT)\"");
+		System.err.println(">>>> Use a 'text editor' to double check, not Excel.");
+		System.exit(1);
 	    }
 	}
 
@@ -202,7 +304,7 @@ public class SessionDataExtractor {
 
 	   Output format: MM/DD/YYYY
 	*/
-	int lastSlash = filename.lastIndexOf('/');
+	int lastSlash = filename.lastIndexOf(dirSlashChar);
 	filename = filename.substring(lastSlash+2);
 	String dateStr = filename.substring(2,4); 
 	dateStr += "/";
@@ -236,10 +338,10 @@ public class SessionDataExtractor {
 	    }
     }
 
-    private void printAsCSV() {
+    private void printSummaryCSV() {
 
-	/* date session time pollname senator clickerid vote */
-	outFile.println("Date,Session,Time,Poll,Senator,ClickerID,Vote");
+	/* ignore date session time pollname senator clickerid vote */
+	outFile.println("Ignore,Date,Session,Time,Poll,Senator,ClickerID,Vote");
 
 	String date = convertToDate(filename);
 
@@ -249,23 +351,116 @@ public class SessionDataExtractor {
 	for (int temp = 0; temp < pollingList.size(); temp++) {    
 	    Element poll = pollingList.get(temp);
 
-		List<Element> voteList = poll.getChildren();
-		for (int vIndex = 0; vIndex < voteList.size(); vIndex++) {
-		    Element vote = voteList.get(vIndex);
+	    List<Element> voteList = poll.getChildren();
+	    for (int vIndex = 0; vIndex < voteList.size(); vIndex++) {
+		Element vote = voteList.get(vIndex);
 
-		    /* date session time pollname senator clickerid vote */
-		    outFile.print(date);
-		    outFile.print("," + sessionElement.getAttribute("ssnn").getValue());
-		    outFile.print("," + poll.getAttribute("strt").getValue());
-		    outFile.print("," + poll.getAttribute("qn").getValue());
-		    String clickerID = vote.getAttribute("id").getValue();
-		    outFile.print("," + getClickerUser(clickerID));
-		    outFile.print("," + clickerID);
-		    String mappedVote = mapVote(vote.getAttribute("ans").getValue());
-		    outFile.println("," + mappedVote);
+		/* date session time pollname senator clickerid vote */
+		String qIdx = poll.getAttribute("idx").getValue();
+		boolean ignored=false;
+		for (int i=0; i<qIgnoreList.length; i++) {
+		    if (qIdx.equals(qIgnoreList[i])) {
+			outFile.print("*");
+			ignored=true;
+		    }
 		}
+		if (! ignored) outFile.print(" ");
+		outFile.print("," + date);
+		outFile.print("," + sessionElement.getAttribute("ssnn").getValue());
+		outFile.print("," + poll.getAttribute("strt").getValue());
+		outFile.print("," + poll.getAttribute("qn").getValue());
+		String clickerID = vote.getAttribute("id").getValue();
+		outFile.print("," + getClickerUser(clickerID));
+		outFile.print("," + clickerID);
+		String mappedVote = mapVote(vote.getAttribute("ans").getValue());
+		outFile.println("," + mappedVote);
 	    }
+	}
+	outFile.close();
     }
+
+    private void printVotelogCSV() {
+	Element sessionElement = document.getRootElement();
+	List<Element> pollingList = sessionElement.getChildren();
+	int numPolls = pollingList.size();
+
+	for (int pollNum = 0; pollNum < pollingList.size(); pollNum++) {    
+	    Element poll = pollingList.get(pollNum);
+	    List<Element> voteList = poll.getChildren();
+	    for (int vIndex = 0; vIndex < voteList.size(); vIndex++) {
+		Element vote = voteList.get(vIndex);
+
+		String clickerID = vote.getAttribute("id").getValue();
+		String senator = getClickerUser(clickerID);
+		String mappedVote = mapVote(vote.getAttribute("ans").getValue());
+		ArrayList<String> votes = senatorMap.get(senator);
+		if (votes != null) 
+		    votes.add(mappedVote);
+		else System.err.println("ERROR: Senator "+senator+" votelist null.");
+	    }
+	}
+
+	/* senator vote1 vote2 vote3 ... voteN */
+	outVotelogFile.print("Senator");
+	int pIdx=1;
+	int numNotIgnored = numPolls - qIgnoreList.length;
+	for ( ; pIdx <= numNotIgnored; pIdx++) {
+	    outVotelogFile.print(", "+pIdx);
+	}
+	outVotelogFile.println();
+
+	String[] senatorKeys = senatorMap.keySet().toArray(new String[1]);
+	Arrays.sort(senatorKeys);
+	for (int senIdx=0; senIdx < senatorKeys.length; senIdx++) {
+	    /* senator vote1 vote2 vote3 ... voteN */
+	    String senator = senatorKeys[senIdx];
+	    outVotelogFile.print(senator);
+	    ArrayList<String> votes = senatorMap.get(senator);
+	    if (votes.size() > 0) {
+		int vIdx=1;
+		String voteStr="";
+		for ( ; vIdx < votes.size(); vIdx++) {
+		    boolean ignored=false;
+		    for (int i=0; i<qIgnoreList.length; i++) {
+			if (vIdx == Integer.parseInt(qIgnoreList[i])) {
+			    ignored=true;
+			    break;
+			}
+		    }
+		    if (! ignored) {
+			voteStr = votes.get(vIdx-1);
+			if ("NoVoteRecorded".equals(voteStr))
+			    voteStr = " ";
+			outVotelogFile.print(", "+voteStr);
+		    }
+		}
+		boolean ignored=false;
+		for (int i=0; i<qIgnoreList.length; i++) {
+		    if (vIdx == Integer.parseInt(qIgnoreList[i])) {
+			ignored=true;
+			break;
+		    }
+		}
+		if (! ignored) {
+		    voteStr = votes.get(vIdx-1);
+		    if ("NoVoteRecorded".equals(voteStr))
+			voteStr = " ";
+		    outVotelogFile.println(", "+voteStr);
+		}
+		else
+		    outVotelogFile.println();
+		    //		voteStr = votes.get(vIdx-1);
+		    //		outVotelogFile.println(","+voteStr);
+	    }
+	    else {
+		// senator didn't vote at all....
+		outVotelogFile.println(",U,N,E,X,C,U,S,E,D");
+	    }
+	}
+	outVotelogFile.close();
+    }
+
+
     private String mapVote(String response) {
 	String mappedResponse;
 	try {
