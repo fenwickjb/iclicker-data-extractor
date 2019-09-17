@@ -58,6 +58,8 @@ public class GUI extends Application
     private String ignoredQuestions = "";
 
     private boolean okayToExtract = false;
+    private static String opSys = "";
+
     /*
     private final ObservableList<VoteMapping> voteMappings =
         FXCollections.observableArrayList(
@@ -79,6 +81,12 @@ public class GUI extends Application
      */
     public static void main(String[] args)
     {
+	String os = System.getProperty("os.name").toLowerCase();
+	if (os.substring(0, 3).equals("mac")) 
+	    opSys = "mac";
+	else if (os.substring(0, 3).equals("win")) 
+	    opSys = "win";
+
         launch(GUI.class, args);
     }
 
@@ -240,12 +248,20 @@ public class GUI extends Application
 
 		// make sure jdom.jar in same location
 		String fileJDOM = extractorJAR.toString();
-		int chIndex = fileJDOM.lastIndexOf('/');
+		int chIndex = -1;
+		if (opSys.equals("mac"))
+		    chIndex = fileJDOM.lastIndexOf('/');
+		else if (opSys.equals("win"))
+		    chIndex = fileJDOM.lastIndexOf('\\');
 		if (chIndex == -1) {
 		    System.err.println("jdom base:"+fileJDOM);
 		}
 		fileJDOM = fileJDOM.substring(0,chIndex);
-		fileJDOM = fileJDOM + "/jdom.jar";
+		if (opSys.equals("mac"))
+		    fileJDOM = fileJDOM + "/jdom.jar";
+		else if (opSys.equals("win"))
+		    fileJDOM = fileJDOM + "\\jdom.jar";
+
 		File jdomFile = new File(fileJDOM);
 		if (jdomFile.exists()) {
 		    button.setText(extractorJAR.toString());
@@ -465,14 +481,13 @@ public class GUI extends Application
                 {
                     String filepath = exportedFileButton.getText();
                     File dir = new File("/");
-                    String os = System.getProperty("os.name").toLowerCase();
-                    if (os.substring(0, 3).equals("mac"))
+                    if (opSys.equals("mac"))
                     {
                         String[] cmdArray = new String[] {
                             "open", "-R", filepath};
                         Runtime.getRuntime().exec(cmdArray, null, dir);
                     }
-                    else if (os.substring(0, 3).equals("win"))
+                    else if (opSys.equals("win"))
                     {
                         // TODO: check on windows
                         Runtime.getRuntime().exec(
