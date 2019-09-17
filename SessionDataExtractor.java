@@ -166,14 +166,15 @@ public class SessionDataExtractor {
 	    else
 		stream.println("  Found RemoteIDs file.");
 
+	    stream.println("  Clicker response map: " + printVoteMap());
+	    stream.println("  Ignoring questions: " + printQIgnoreList());
+
 	    if (outFile == System.out) 
 		stream.println("  Unable to open output file, dumping to screen.");
 	    else
 		stream.println("  Output file: " + outFilename);
 
-	    stream.println("  Clicker response map: " + printVoteMap());
-	    stream.println("  Ignoring questions: " + printQIgnoreList());
-	    stream.println();
+	    stream.println("Extraction complete.");
 	}
     }
     public String printQIgnoreList() {
