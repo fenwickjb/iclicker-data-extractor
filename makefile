@@ -28,8 +28,8 @@ gui_manifest.txt:
 mkjar: SessionDataExtractor.class jdom.jar manifest.txt SessionDataExtractor.java GUI.java
 	jar cfm SessionDataExtractor.jar manifest.txt SessionDataExtractor.class SessionDataExtractor.java jdom.jar GUI.java
 
-mkguijar: GUI.class gui_manifest.txt GUI.java
-	jar cfm JaysFacSenVoteExtractor.jar gui_manifest.txt GUI.class GUI.java
+mkguijar: GUI.class gui_manifest.txt GUI.java 
+	jar cfm JaysFacSenVoteExtractor.jar gui_manifest.txt GUI.java GUI*.class
 
 runjar: SessionDataExtractor.jar 
 	java -jar SessionDataExtractor.jar inputs/L1709190946.xml
