@@ -429,7 +429,7 @@ public class GUI extends Application
                     sessionXML.toString()};
 		                String exportFeedback = Report.generate(args);
 		*/
-		String exportFeedback = gen(sessionXML.toString(), extractorJAR.toString());
+		String exportFeedback = gen(sessionXML.toString(), extractorJAR.toString(), ignoredQuestions);
                 exportedFileButton.setText(exportFeedback);
                 exportedFilesRowNode.setVisible(true);
             });
@@ -445,8 +445,17 @@ public class GUI extends Application
      * @param args the command line options and input filename
      * @return
      */
-    public static String gen(String xmlFilename, String jarFilename) {
-        String[] command = {"java", "-jar", jarFilename, xmlFilename};
+    public static String gen(String xmlFilename, String jarFilename, String ignoredQs) {
+        String[] command = null;
+	if (ignoredQs == null || ignoredQs.length() == 0) {
+	    String[] c = {"java", "-jar", jarFilename, xmlFilename};
+	    command = c;
+	}
+	else {
+	    String[] c = {"java", "-jar", jarFilename, "-qignore", ignoredQs, xmlFilename};
+	    command = c;
+	}
+
 	//	System.out.println("Command[3]="+command[3]);
         StringBuilder cmdReturn = new StringBuilder();
         try {
