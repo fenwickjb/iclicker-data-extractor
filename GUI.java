@@ -61,15 +61,16 @@ public class GUI extends Application
     private static String opSys = "";
 
     /*
+    */
     private final ObservableList<VoteMapping> voteMappings =
         FXCollections.observableArrayList(
-            new VoteMapping("A", "A"),
-            new VoteMapping("B", "B"),
-            new VoteMapping("C", "C"),
-            new VoteMapping("D", "D"),
-            new VoteMapping("E", "E")
+            new VoteMapping("A", "Yes"),
+            new VoteMapping("B", ""),
+            new VoteMapping("C", "No"),
+            new VoteMapping("D", ""),
+            new VoteMapping("E", "Abstain")
         );
-    */
+
     private Button exportedFileButton;
 
     /**
@@ -121,13 +122,13 @@ public class GUI extends Application
         HBox sessionDataFileRow = makeSessionDataFileRow(stage);
         HBox extractorFileRow = makeExtractorFileRow(stage);
 
-	/*
         HBox voteMapRow = makeVoteMapRow();
         voteMapRow.setId(ID_VOTE_MAP_ROW);
+	/*
+	*/
 
         HBox ignoredQuestionsRow = makeIgnoredQuestionsRow();
         ignoredQuestionsRow.setId(ID_IGNORED_QUESTIONS_ROW);
-	*/
 
         Separator exportSeparator = new Separator();
 
@@ -143,7 +144,8 @@ public class GUI extends Application
 
         vbox.getChildren().addAll(sessionDataFileRow, 
 				  extractorFileRow,
-				  /* voteMapRow, ignoredQuestionsRow,*/
+				  voteMapRow,
+				  ignoredQuestionsRow,
 				  exportSeparator, 
 				  exportButtonRow, 
 				  exportedFilesRow,
@@ -155,11 +157,12 @@ public class GUI extends Application
         {
             VBox.setVgrow(child, Priority.ALWAYS);
         }
-	/*
+
         voteMapRowNode = vbox.lookup("#" + ID_VOTE_MAP_ROW);
         ignoredQuestionsRowNode = vbox.lookup("#" + ID_IGNORED_QUESTIONS_ROW);
         voteMapRowNode.setDisable(true);
         ignoredQuestionsRowNode.setDisable(true);
+	/*
 	*/
         exportButtonRowNode = vbox.lookup("#" + ID_EXPORT_BUTTON_ROW);
         exportedFilesRowNode = vbox.lookup("#" + ID_EXPORTED_FILES_ROW);
@@ -207,9 +210,10 @@ public class GUI extends Application
             {
                 sessionXML = XML_CHOOSER.showOpenDialog(stage);
                 button.setText(sessionXML.toString());
-		/*
+
                 voteMapRowNode.setDisable(false);
                 ignoredQuestionsRowNode.setDisable(false);
+		/*
 		*/
             });
 
@@ -272,9 +276,10 @@ public class GUI extends Application
 		    okayToExtract = false;
 		    throw new RuntimeException("CAN'T FIND JDOM.JAR FILE. Should be with SessionDataExtractor.jar file.");
 		}
-		/*
+
                 voteMapRowNode.setDisable(false);
                 ignoredQuestionsRowNode.setDisable(false);
+		/*
 		*/
 
 		if (okayToExtract) 
@@ -291,19 +296,20 @@ public class GUI extends Application
      *
      * @return the HBox row
      */
-    /*
+
     private HBox makeVoteMapRow()
     {
         HBox hbox = new HBox();
 
         hbox.setSpacing(HORIZONTAL_SPACING);
-        Text text = new Text("Votemap:");
+        Text text = new Text("ClickerButton-to-Vote Map:");
 
         TableView<VoteMapping> voteMapTable = makeVoteMapTableView();
         hbox.getChildren().addAll(text, voteMapTable);
 
         return hbox;
     }
+    /*
     */
 
     /**
@@ -311,7 +317,7 @@ public class GUI extends Application
      *
      * @return the TableView of VoteMapping's
      */
-    /*
+
     private TableView<VoteMapping> makeVoteMapTableView()
     {
         TableView<VoteMapping> voteMapTable = new TableView<>();
@@ -341,6 +347,7 @@ public class GUI extends Application
             * (voteMappings.size() + 1.1));
         return voteMapTable;
     }
+    /*
     */
 
     /**
@@ -354,7 +361,7 @@ public class GUI extends Application
         HBox hbox = new HBox();
 
         hbox.setSpacing(HORIZONTAL_SPACING);
-        Text text = new Text("Ignored Questions:");
+        Text text = new Text("Votes to Ignore:");
         TextField textField = new TextField();
 
         // make it red if it's invalid
@@ -422,7 +429,7 @@ public class GUI extends Application
                     sessionXML.toString()};
 		                String exportFeedback = Report.generate(args);
 		*/
-		String exportFeedback = gen(sessionXML.toString(), extractorJAR.toString());
+		String exportFeedback = gen(sessionXML.toString(), extractorJAR.toString(), ignoredQuestions);
                 exportedFileButton.setText(exportFeedback);
                 exportedFilesRowNode.setVisible(true);
             });
@@ -438,8 +445,17 @@ public class GUI extends Application
      * @param args the command line options and input filename
      * @return
      */
-    public static String gen(String xmlFilename, String jarFilename) {
-        String[] command = {"java", "-jar", jarFilename, xmlFilename};
+    public static String gen(String xmlFilename, String jarFilename, String ignoredQs) {
+        String[] command = null;
+	if (ignoredQs == null || ignoredQs.length() == 0) {
+	    String[] c = {"java", "-jar", jarFilename, xmlFilename};
+	    command = c;
+	}
+	else {
+	    String[] c = {"java", "-jar", jarFilename, "-qignore", ignoredQs, xmlFilename};
+	    command = c;
+	}
+
 	//	System.out.println("Command[3]="+command[3]);
         StringBuilder cmdReturn = new StringBuilder();
         try {
@@ -512,7 +528,7 @@ public class GUI extends Application
      *
      * @return a formatted votemap string
      */
-    /*
+
     private String getVoteMappingsString()
     {
         StringBuilder vmString = new StringBuilder();
@@ -523,6 +539,7 @@ public class GUI extends Application
         vmString.deleteCharAt(vmString.length() - 1);
         return vmString.toString();
     }
+    /*
     */
 
     /**
